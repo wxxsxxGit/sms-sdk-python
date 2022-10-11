@@ -15,37 +15,47 @@ sms http protocol sdk
 
 [【V4】短信运营商失败状态码一览表]:https://thoughts.teambition.com/share/62f9aa40f3d36d0041586a7f#title=运营商短信失败状态码一览表
 
-# GOLANG
+# 操作步骤
 
-### 开启GO111MODULE="on"
+### python环境
+脚本在python3.10.7以及3.6.8 通过测试
 
 ### git下载sdk
 ```
-git clone https://github.com/wxxsxxGit/sms-sdk-go
+git clone https://github.com/wxxsxxGit/sms-sdk-python
 ```
 
-### 自动安装依赖文件
+### 进入虚拟环境
 
-进入下载的sms-sdk-go目录执行
+进入下载的sms-sdk-python目录执行命令
+创建虚拟环境
 ```         
-go mod tidy
+python -m venv env
 ```
 
-### 编译成二进制文件
-进入下载的sms-sdk-go目录执行
+### 进入虚拟环境
+进入下载的sms-sdk-python目录执行命令
+windows环境下
 ```
-go build demo.go
+ .\env\Scripts\activate
+ ```
+linux环境下
 ```
+source env/bin/activate
+```
+
+### 安装依赖文件
+进入下载的sms-sdk-python目录执行命令
+```
+pip install -r requirements.txt
+```
+
 ### 配置文件
+进入下载的sms-sdk-python目录执行命令
 ```
+创建config目录
+在config目录下添加配置文件
 配置文件名字为sms.yaml
-依次从/etc目录
-命令执行位置的当前目录
-命令执行位置的config目录
-命令执行位置的上一级config目录
-命令执行位置的上两级config目录
-命令执行位置的上三级config目录
-查找sms.yaml文件，查找到就作为配置文件
 ```
 配置文件内容如下,配置信息联系运营获取
 ```
@@ -56,11 +66,8 @@ reportUrl: xxxxxxxxx
 templateUrl: xxxxxxxxx
 ```
 
-### 运行二进制文件
-
+### 运行文件
+进入下载的sms-sdk-python目录执行命令
 ```
-linux环境
-./demo
-windows环境
-双击执行demo.exe
+python main.py
 ```
