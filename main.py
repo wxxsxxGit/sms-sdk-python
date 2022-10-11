@@ -27,9 +27,9 @@ def demoSingleSend():
         "mobile":  "13800001111,13955556666,13545556666",
         "extCode": "123456",
         "sId":     "123456789abcdefg"}
-    finalReqBody = json.dumps(requestBody)
+    finalReqBody = json.dumps(requestBody,ensure_ascii=False)
     headers = smsSigner.Sign(finalReqBody)
-    resp = requests.post(smsSigner.SingleSendUrl(),headers=headers,data=finalReqBody,timeout=3)
+    resp = requests.post(smsSigner.SingleSendUrl(),headers=headers,data=finalReqBody.encode("utf-8"),timeout=3)
     output = CurlStyleOutput(headers,finalReqBody,resp)
     fileToWrite.write(output)
     if resp.status_code != 200:
@@ -50,9 +50,9 @@ def demoSingleSecureSend():
     tempReqBody = '''{"content":"【线上线下】您的验证码为123456，在10分钟内有效。","mobile":"13800001111,13955556666,13545556666","extCode":"123456","sId":"123456789abcdefg"}'''
     contentString = AesECBEncrypt(tempReqBody, NormalizeKey(smsSigner.SpKey))
     secondReqBody = {"content":contentString}
-    finalReqBody = json.dumps(secondReqBody)
+    finalReqBody = json.dumps(secondReqBody,ensure_ascii=False)
     headers = smsSigner.Sign(finalReqBody)
-    resp = requests.post(smsSigner.SingleSecureSendUrl(),headers=headers,data=finalReqBody,timeout=3)
+    resp = requests.post(smsSigner.SingleSecureSendUrl(),headers=headers,data=finalReqBody.encode("utf-8"),timeout=3)
     output = CurlStyleOutput(headers,finalReqBody,resp)
     fileToWrite.write(output)
     if resp.status_code != 200:
@@ -83,9 +83,9 @@ def demoMultiSend():
         "msgId":   "123456787"}
 
     requestBody = [smsBody1, smsBody2,smsBody3]
-    finalReqBody = json.dumps(requestBody)
+    finalReqBody = json.dumps(requestBody,ensure_ascii=False)
     headers = smsSigner.Sign(finalReqBody)
-    resp = requests.post(smsSigner.MultiSendUrl(),headers=headers,data=finalReqBody,timeout=3)
+    resp = requests.post(smsSigner.MultiSendUrl(),headers=headers,data=finalReqBody.encode("utf-8"),timeout=3)
     output = CurlStyleOutput(headers,finalReqBody,resp)
     fileToWrite.write(output)
     if resp.status_code != 200:
@@ -100,9 +100,9 @@ def demoStatusFetch():
     requestBody = {
         "maxSize": 500,
     }
-    finalReqBody = json.dumps(requestBody)
+    finalReqBody = json.dumps(requestBody,ensure_ascii=False)
     headers = smsSigner.Sign(finalReqBody)
-    resp = requests.post(smsSigner.StatusFetchUrl(),headers=headers,data=finalReqBody,timeout=3)
+    resp = requests.post(smsSigner.StatusFetchUrl(),headers=headers,data=finalReqBody.encode("utf-8"),timeout=3)
     output = CurlStyleOutput(headers,finalReqBody,resp)
     fileToWrite.write(output)
     if resp.status_code != 200:
@@ -116,9 +116,9 @@ def  demoUpstreamFetch():
     requestBody = {
         "maxSize": 500,
     }
-    finalReqBody = json.dumps(requestBody)
+    finalReqBody = json.dumps(requestBody,ensure_ascii=False)
     headers = smsSigner.Sign(finalReqBody)
-    resp = requests.post(smsSigner.UpstreamFetchUrl(),headers=headers,data=finalReqBody,timeout=3)
+    resp = requests.post(smsSigner.UpstreamFetchUrl(),headers=headers,data=finalReqBody.encode("utf-8"),timeout=3)
     output = CurlStyleOutput(headers,finalReqBody,resp)
     fileToWrite.write(output)
     if resp.status_code != 200:
@@ -144,9 +144,9 @@ def demoDailyStatsFetch():
     requestBody = {
         "date": datetime.datetime.now().strftime("%Y%m%d"),
         }
-    finalReqBody = json.dumps(requestBody)
+    finalReqBody = json.dumps(requestBody,ensure_ascii=False)
     headers = smsSigner.Sign(finalReqBody)
-    resp = requests.post(smsSigner.DailyStatsUrl(),headers=headers,data=finalReqBody,timeout=3)
+    resp = requests.post(smsSigner.DailyStatsUrl(),headers=headers,data=finalReqBody.encode("utf-8"),timeout=3)
     output = CurlStyleOutput(headers,finalReqBody,resp)
     fileToWrite.write(output)
     if resp.status_code != 200:
@@ -163,9 +163,9 @@ def demoTemplateAdd():
         "templateContent": "线上线下addTemplate SDK DEMO template content ${code} template " + RandString(20),
         "remark":          "线上线下addTemplate SDK DEMO template " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
     }
-    finalReqBody = json.dumps(requestBody)
+    finalReqBody = json.dumps(requestBody,ensure_ascii=False)
     headers = smsSigner.Sign(finalReqBody)
-    resp = requests.post(smsSigner.TemplateAddUrl(),headers=headers,data=finalReqBody,timeout=3)
+    resp = requests.post(smsSigner.TemplateAddUrl(),headers=headers,data=finalReqBody.encode("utf-8"),timeout=3)
     output = CurlStyleOutput(headers,finalReqBody,resp)
     fileToWrite.write(output)
     if resp.status_code != 200:
@@ -185,9 +185,9 @@ def demoTemplateModify(templateCode):
         "templateContent": "线上线下addTemplate SDK DEMO template content ${code} modify template " + RandString(20),
         "remark":          "线上线下addTemplate SDK DEMO template " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
 	}
-    finalReqBody = json.dumps(requestBody)
+    finalReqBody = json.dumps(requestBody,ensure_ascii=False)
     headers = smsSigner.Sign(finalReqBody)
-    resp = requests.post(smsSigner.TemplateModifyUrl(),headers=headers,data=finalReqBody,timeout=3)
+    resp = requests.post(smsSigner.TemplateModifyUrl(),headers=headers,data=finalReqBody.encode("utf-8"),timeout=3)
     output = CurlStyleOutput(headers,finalReqBody,resp)
     fileToWrite.write(output)
     if resp.status_code != 200:
@@ -209,9 +209,9 @@ def demoTemplateStatus(templateCode):
     requestBody = {
         "templateCodes": ",".join(tList),
     }
-    finalReqBody = json.dumps(requestBody)
+    finalReqBody = json.dumps(requestBody,ensure_ascii=False)
     headers = smsSigner.Sign(finalReqBody)
-    resp = requests.post(smsSigner.TemplateStatusUrl(),headers=headers,data=finalReqBody,timeout=3)
+    resp = requests.post(smsSigner.TemplateStatusUrl(),headers=headers,data=finalReqBody.encode("utf-8"),timeout=3)
     output = CurlStyleOutput(headers,finalReqBody,resp)
     fileToWrite.write(output)
     if resp.status_code != 200:
@@ -231,9 +231,9 @@ def demoTemplateDelete(templateCode):
     requestBody = {
         "templateCode": templateCode,
     }
-    finalReqBody = json.dumps(requestBody)
+    finalReqBody = json.dumps(requestBody,ensure_ascii=False)
     headers = smsSigner.Sign(finalReqBody)
-    resp = requests.post(smsSigner.TemplateDeleteUrl(),headers=headers,data=finalReqBody,timeout=3)
+    resp = requests.post(smsSigner.TemplateDeleteUrl(),headers=headers,data=finalReqBody.encode("utf-8"),timeout=3)
     output = CurlStyleOutput(headers,finalReqBody,resp)
     fileToWrite.write(output)
     if resp.status_code != 200:
@@ -259,9 +259,9 @@ def demoTemplateSendSms(templateCode):
         "params":       paramsString,
         "mobile":       "18799991367,12899190876,13914117531",
     }
-    finalReqBody = json.dumps(requestBody)
+    finalReqBody = json.dumps(requestBody,ensure_ascii=False)
     headers = smsSigner.Sign(finalReqBody)
-    resp = requests.post(smsSigner.TemplateSendSmsUrl(),headers=headers,data=finalReqBody,timeout=3)
+    resp = requests.post(smsSigner.TemplateSendSmsUrl(),headers=headers,data=finalReqBody.encode("utf-8"),timeout=3)
     output = CurlStyleOutput(headers,finalReqBody,resp)
     fileToWrite.write(output)
     if resp.status_code != 200:
@@ -310,9 +310,9 @@ def demoTemplateSendBatchSms(templateCode):
         "mobile":       "1895606996",
     }
     requestBody = [item1,item2,item3,item4,item5]
-    finalReqBody = json.dumps(requestBody)
+    finalReqBody = json.dumps(requestBody,ensure_ascii=False)
     headers = smsSigner.Sign(finalReqBody)
-    resp = requests.post(smsSigner.TemplateSendBatchSmsUrl(),headers=headers,data=finalReqBody,timeout=3)
+    resp = requests.post(smsSigner.TemplateSendBatchSmsUrl(),headers=headers,data=finalReqBody.encode("utf-8"),timeout=3)
     output = CurlStyleOutput(headers,finalReqBody,resp)
     fileToWrite.write(output)
     if resp.status_code != 200:

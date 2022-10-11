@@ -71,3 +71,8 @@ templateUrl: xxxxxxxxx
 ```
 python main.py
 ```
+
+### 退出虚拟环境
+```
+deactivate
+```
