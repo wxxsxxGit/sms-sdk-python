@@ -1,4 +1,4 @@
-# sms-sdk-go
+# sms-sdk-python
 
 sms http protocol sdk
 
